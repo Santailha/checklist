@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Dados do Negócio Imobiliário</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Light gray background */
+        }
+        /* Custom styles for focus states and general appearance */
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        input[type="date"]:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #6366f1; /* Indigo 500 */
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.5); /* Indigo 500 with transparency */
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-6 md:p-8 lg:p-10">
+    <div class="max-w-4xl mx-auto bg-white p-6 sm:p-8 md:p-10 rounded-lg shadow-xl">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-center text-gray-900 mb-8">
+            Checklist de Dados do Negócio Imobiliário
+        </h1>
+
+        <form id="realEstateForm" class="space-y-8">
+            <!-- Dados do Imóvel -->
+            <section class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Dados do Imóvel</h2>
+                <div class="space-y-4">
+                    <div>
+                        <label for="descricaoImovel" class="block text-sm font-medium text-gray-700 mb-1">Descrição do Imóvel:</label>
+                        <textarea id="descricaoImovel" name="descricaoImovel" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2"></textarea>
+                    </div>
+                    <div>
+                        <label for="itensAcompanham" class="block text-sm font-medium text-gray-700 mb-1">Itens que acompanham o imóvel:</label>
+                        <textarea id="itensAcompanham" name="itensAcompanham" rows="2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Posse ou escritura?</label>
+                        <div class="mt-1 flex space-x-4">
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="posseEscritura" value="Posse" class="form-radio text-indigo-600 rounded-full focus:ring-indigo-500">
+                                <span class="ml-2 text-gray-700">Posse</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="posseEscritura" value="Escritura" class="form-radio text-indigo-600 rounded-full focus:ring-indigo-500">
+                                <span class="ml-2 text-gray-700">Escritura</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Condições de Entrega -->
+            <section class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Condições de Entrega</h2>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Entrega do Imóvel:</label>
+                        <div class="mt-1 flex space-x-4">
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="entregaImovel" value="Quitação" class="form-radio text-indigo-600 rounded-full focus:ring-indigo-500">
+                                <span class="ml-2 text-gray-700">Quitação</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="entregaImovel" value="Precária" class="form-radio text-indigo-600 rounded-full focus:ring-indigo-500">
+                                <span class="ml-2 text-gray-700">Precária</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="obsEntrega" class="block text-sm font-medium text-gray-700 mb-1">Observação da Entrega do Imóvel (se precária):</label>
+                        <textarea id="obsEntrega" name="obsEntrega" rows="2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2"></textarea>
+                    </div>
+                    <div>
+                        <label for="obsJuridico" class="block text-sm font-medium text-gray-700 mb-1">Observações pertinentes ao Jurídico:</label>
+                        <textarea id="obsJuridico" name="obsJuridico" rows="2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2"></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Valores e Pagamentos -->
+            <section class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Valores e Pagamentos</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="valorFinal" class="block text-sm font-medium text-gray-700 mb-1">Valor final do negócio (R$):</label>
+                        <input type="number" id="valorFinal" name="valorFinal" step="0.01" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                    </div>
+                    <div>
+                        <label for="valorEntrada" class="block text-sm font-medium text-gray-700 mb-1">Valor da entrada (R$):</label>
+                        <input type="number" id="valorEntrada" name="valorEntrada" step="0.01" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Imóvel ou veículo como pagamento?</label>
+                        <div class="mt-1 flex space-x-4">
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="permuta" value="Sim" class="form-radio text-indigo-600 rounded-full focus:ring-indigo-500">
+                                <span class="ml-2 text-gray-700">Sim</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="permuta" value="Não" class="form-radio text-indigo-600 rounded-full focus:ring-indigo-500">
+                                <span class="ml-2 text-gray-700">Não</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="valorDescontadoPermuta" class="block text-sm font-medium text-gray-700 mb-1">Valor descontado de permuta (R$):</label>
+                        <input type="number" id="valorDescontadoPermuta" name="valorDescontadoPermuta" step="0.01" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                    </div>
+                    <div>
+                        <label for="percentualComissao" class="block text-sm font-medium text-gray-700 mb-1">Percentual da comissão (apenas número, sem %):</label>
+                        <input type="number" id="percentualComissao" name="percentualComissao" step="0.01" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label for="condicaoPagamentoComissao" class="block text-sm font-medium text-gray-700 mb-1">Condição de pagamento da comissão:</label>
+                        <input type="text" id="condicaoPagamentoComissao" name="condicaoPagamentoComissao" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label for="momentoPagamentoComissao" class="block text-sm font-medium text-gray-700 mb-1">Em que momento a comissão é paga?</label>
+                        <input type="text" id="momentoPagamentoComissao" name="momentoPagamentoComissao" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Parceria -->
+            <section class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Parceria</h2>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Parceria com corretor ou imobiliária?</label>
+                    <div class="mt-1 flex space-x-4">
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="parceria" value="Corretor" class="form-radio text-indigo-600 rounded-full focus:ring-indigo-500">
+                            <span class="ml-2 text-gray-700">Corretor</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="parceria" value="Imobiliária" class="form-radio text-indigo-600 rounded-full focus:ring-indigo-500">
+                            <span class="ml-2 text-gray-700">Imobiliária</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="parceria" value="Nenhuma" class="form-radio text-indigo-600 rounded-full focus:ring-indigo-500">
+                            <span class="ml-2 text-gray-700">Nenhuma</span>
+                        </label>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dados Bancários do Vendedor -->
+            <section class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Dados Bancários do Vendedor</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="banco" class="block text-sm font-medium text-gray-700 mb-1">Banco:</label>
+                        <input type="text" id="banco" name="banco" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                    </div>
+                    <div>
+                        <label for="agencia" class="block text-sm font-medium text-gray-700 mb-1">Agência:</label>
+                        <input type="text" id="agencia" name="agencia" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                    </div>
+                    <div>
+                        <label for="contaCorrente" class="block text-sm font-medium text-gray-700 mb-1">Conta Corrente:</label>
+                        <input type="text" id="contaCorrente" name="contaCorrente" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                    </div>
+                    <div>
+                        <label for="nomeTitular" class="block text-sm font-medium text-gray-700 mb-1">Nome do titular:</label>
+                        <input type="text" id="nomeTitular" name="nomeTitular" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label for="cpfCnpj" class="block text-sm font-medium text-gray-700 mb-1">CPF/CNPJ:</label>
+                        <input type="text" id="cpfCnpj" name="cpfCnpj" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Previsão de Assinatura -->
+            <section class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Previsão de Assinatura</h2>
+                <div>
+                    <label for="dataAssinatura" class="block text-sm font-medium text-gray-700 mb-1">Data prevista para assinatura do contrato:</label>
+                    <input type="date" id="dataAssinatura" name="dataAssinatura" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                </div>
+            </section>
+
+            <!-- Documentação -->
+            <section class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Documentação</h2>
+                <div>
+                    <label for="documentosAnexar" class="block text-sm font-medium text-gray-700 mb-1">Documentos do imóvel e proprietário (anexar arquivos):</label>
+                    <input type="file" id="documentosAnexar" name="documentosAnexar" multiple class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+                    <p class="mt-2 text-xs text-gray-500">Nota: O envio de arquivos diretamente para um webhook via formulário HTML simples não é totalmente suportado. Geralmente, isso requer um backend para processar o upload. Este campo é apenas para demonstração.</p>
+                </div>
+            </section>
+
+            <!-- Equipe Envolvida -->
+            <section class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Equipe Envolvida</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div>
+                        <label for="corretor2" class="block text-sm font-medium text-gray-700 mb-1">Corretor 2:</label>
+                        <input type="text" id="corretor2" name="corretor2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                    </div>
+                    <div>
+                        <label for="gerente1" class="block text-sm font-medium text-gray-700 mb-1">Gerente 1:</label>
+                        <input type="text" id="gerente1" name="gerente1" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                    </div>
+                    <div>
+                        <label for="gerente2" class="block text-sm font-medium text-gray-700 mb-1">Gerente 2:</label>
+                        <input type="text" id="gerente2" name="gerente2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                    </div>
+                    <div>
+                        <label for="agenciador1" class="block text-sm font-medium text-gray-700 mb-1">Agenciador 1:</label>
+                        <input type="text" id="agenciador1" name="agenciador1" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                    </div>
+                    <div>
+                        <label for="agenciador2" class="block text-sm font-medium text-gray-700 mb-1">Agenciador 2:</label>
+                        <input type="text" id="agenciador2" name="agenciador2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                    </div>
+                    <div>
+                        <label for="agenciador3" class="block text-sm font-medium text-gray-700 mb-1">Agenciador 3:</label>
+                        <input type="text" id="agenciador3" name="agenciador3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Botão de Envio -->
+            <div class="flex justify-center mt-8">
+                <button type="submit" id="submitButton" class="px-8 py-3 bg-indigo-600 text-white font-bold rounded-full shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition duration-300 ease-in-out transform hover:scale-105">
+                    Enviar Informações
+                </button>
+            </div>
+            <div id="messageBox" class="mt-4 p-3 text-center text-sm rounded-md hidden"></div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('realEstateForm');
+            const submitButton = document.getElementById('submitButton');
+            const messageBox = document.getElementById('messageBox');
+            const webhookUrl = 'https://hook.us2.make.com/z7olawqt3sdcfq0n9jcc31kx7l58fmcc';
+
+            /**
+             * Formats the collected form data into a human-readable string for email body.
+             * @param {Object} data - The form data object.
+             * @returns {string} The formatted string.
+             */
+            function formatEmailBody(data) {
+                let emailBody = 'Detalhes do Negócio Imobiliário:\n\n';
+
+                // Dados do Imóvel
+                emailBody += '--- Dados do Imóvel ---\n';
+                emailBody += `Descrição do Imóvel: ${data.descricaoImovel || 'Não informado'}\n`;
+                emailBody += `Itens que acompanham o imóvel: ${data.itensAcompanham || 'Não informado'}\n`;
+                emailBody += `Posse ou escritura: ${data.posseEscritura || 'Não informado'}\n\n`;
+
+                // Condições de Entrega
+                emailBody += '--- Condições de Entrega ---\n';
+                emailBody += `Entrega do Imóvel: ${data.entregaImovel || 'Não informado'}\n`;
+                emailBody += `Observação da Entrega do Imóvel (se precária): ${data.obsEntrega || 'Não informado'}\n`;
+                emailBody += `Observações pertinentes ao Jurídico: ${data.obsJuridico || 'Não informado'}\n\n`;
+
+                // Valores e Pagamentos
+                emailBody += '--- Valores e Pagamentos ---\n';
+                emailBody += `Valor final do negócio (R$): ${data.valorFinal.toFixed(2) || 'Não informado'}\n`;
+                emailBody += `Valor da entrada (R$): ${data.valorEntrada.toFixed(2) || 'Não informado'}\n`;
+                emailBody += `Imóvel ou veículo como pagamento?: ${data.permuta || 'Não informado'}\n`;
+                emailBody += `Valor descontado de permuta (R$): ${data.valorDescontadoPermuta.toFixed(2) || 'Não informado'}\n`;
+                emailBody += `Percentual da comissão: ${data.percentualComissao || 'Não informado'}%\n`;
+                emailBody += `Condição de pagamento da comissão: ${data.condicaoPagamentoComissao || 'Não informado'}\n`;
+                emailBody += `Em que momento a comissão é paga?: ${data.momentoPagamentoComissao || 'Não informado'}\n\n`;
+
+                // Parceria
+                emailBody += '--- Parceria ---\n';
+                emailBody += `Parceria com corretor ou imobiliária?: ${data.parceria || 'Não informado'}\n\n`;
+
+                // Dados Bancários do Vendedor
+                emailBody += '--- Dados Bancários do Vendedor ---\n';
+                emailBody += `Banco: ${data.banco || 'Não informado'}\n`;
+                emailBody += `Agência: ${data.agencia || 'Não informado'}\n`;
+                emailBody += `Conta Corrente: ${data.contaCorrente || 'Não informado'}\n`;
+                emailBody += `Nome do titular: ${data.nomeTitular || 'Não informado'}\n`;
+                emailBody += `CPF/CNPJ: ${data.cpfCnpj || 'Não informado'}\n\n`;
+
+                // Previsão de Assinatura
+                emailBody += '--- Previsão de Assinatura ---\n';
+                emailBody += `Data prevista para assinatura do contrato: ${data.dataAssinatura || 'Não informado'}\n\n`;
+
+                // Documentação (apenas nomes dos arquivos, conforme nota)
+                emailBody += '--- Documentação ---\n';
+                emailBody += `Documentos anexados (nomes): ${data.documentosAnexar || 'Nenhum arquivo selecionado'}\n\n`;
+
+                // Equipe Envolvida
+                emailBody += '--- Equipe Envolvida ---\n';
+                emailBody += `Corretor 2: ${data.corretor2 || 'Não informado'}\n`;
+                emailBody += `Gerente 1: ${data.gerente1 || 'Não informado'}\n`;
+                emailBody += `Gerente 2: ${data.gerente2 || 'Não informado'}\n`;
+                emailBody += `Agenciador 1: ${data.agenciador1 || 'Não informado'}\n`;
+                emailBody += `Agenciador 2: ${data.agenciador2 || 'Não informado'}\n`;
+                emailBody += `Agenciador 3: ${data.agenciador3 || 'Não informado'}\n\n`;
+
+                return emailBody;
+            }
+
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault(); // Prevent default form submission
+
+                submitButton.disabled = true;
+                submitButton.textContent = 'Enviando...';
+                messageBox.classList.add('hidden'); // Hide previous messages
+
+                const formData = new FormData(form);
+                const data = {};
+
+                // Collect data from all form fields
+                for (const [key, value] of formData.entries()) {
+                    // Handle radio buttons specifically to get the checked value
+                    if (key === 'posseEscritura' || key === 'entregaImovel' || key === 'permuta' || key === 'parceria') {
+                        const checkedRadio = form.querySelector(`input[name="${key}"]:checked`);
+                        data[key] = checkedRadio ? checkedRadio.value : '';
+                    } else if (key === 'documentosAnexar') {
+                        // For file inputs, we'll just note the file names for the webhook.
+                        // Actual file upload requires a backend.
+                        const files = formData.getAll(key);
+                        if (files.length > 0 && files[0].name) {
+                            data[key] = Array.from(files).map(file => file.name).join(', ');
+                        } else {
+                            data[key] = '';
+                        }
+                    } else {
+                        data[key] = value;
+                    }
+                }
+
+                // Convert numeric fields to actual numbers
+                data.valorFinal = parseFloat(data.valorFinal) || 0;
+                data.valorEntrada = parseFloat(data.valorEntrada) || 0;
+                data.valorDescontadoPermuta = parseFloat(data.valorDescontadoPermuta) || 0;
+                data.percentualComissao = parseFloat(data.percentualComissao) || 0;
+
+                // Format the data for the email body
+                const emailBodyContent = formatEmailBody(data);
+                console.log("Conteúdo do E-mail para o módulo Gmail:\n", emailBodyContent);
+
+                try {
+                    const response = await fetch(webhookUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data), // Still sending JSON to the original webhook
+                    });
+
+                    if (response.ok) {
+                        messageBox.textContent = 'Informações enviadas com sucesso! (Conteúdo do e-mail gerado no console)';
+                        messageBox.className = 'mt-4 p-3 text-center text-sm rounded-md bg-green-100 text-green-700';
+                        form.reset(); // Clear the form on success
+                    } else {
+                        const errorText = await response.text();
+                        messageBox.textContent = `Erro ao enviar informações: ${response.status} - ${errorText || 'Erro desconhecido'}`;
+                        messageBox.className = 'mt-4 p-3 text-center text-sm rounded-md bg-red-100 text-red-700';
+                    }
+                } catch (error) {
+                    messageBox.textContent = `Erro de conexão: ${error.message}`;
+                    messageBox.className = 'mt-4 p-3 text-center text-sm rounded-md bg-red-100 text-red-700';
+                } finally {
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Enviar Informações';
+                    messageBox.classList.remove('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
