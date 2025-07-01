@@ -9,49 +9,155 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6; /* Light gray background */
+            background-color: #f3f4f6; /* Fundo cinza claro */
         }
-        /* Custom styles for focus states and general appearance */
+        /* Definindo as variáveis CSS com as novas cores da marca */
+        :root {
+            --primary-blue: #3d357e; /* R:61, G:53, B:126 */
+            --primary-blue-dark: #312b65; /* Um tom ligeiramente mais escuro para hover */
+            --secondary-yellow: #edae0f; /* R:237, G:174, B:15 */
+            --secondary-yellow-dark: #cc970c; /* Um tom mais escuro para o hover do amarelo */
+            --section-bg-light: #f8f8fc; /* Um fundo muito claro para as seções */
+            --text-color-dark: #1f2937; /* Texto escuro para títulos e informações */
+            --text-color-medium: #4b5563; /* Texto médio para labels */
+        }
+
+        /* Aplicando as novas cores e estilos aos elementos do Tailwind */
+        .bg-brand-blue { background-color: var(--primary-blue); }
+        .hover\:bg-brand-blue-dark:hover { background-color: var(--primary-blue-dark); }
+        .focus\:ring-brand-blue:focus { --tw-ring-color: var(--primary-blue); }
+        .text-brand-blue { color: var(--primary-blue); }
+        .border-brand-blue { border-color: var(--primary-blue); }
+
+        /* Estilos para o container principal */
+        .main-container {
+            border: 2px solid var(--primary-blue); /* Borda sólida com a cor principal */
+            box-shadow: 0 10px 20px rgba(61, 53, 126, 0.2); /* Sombra mais pronunciada com a cor principal */
+        }
+
+        /* Estilos para a logo e seu container */
+        .logo-section {
+            background-color: var(--primary-blue); /* Fundo azul para a seção da logo */
+            padding: 1.5rem;
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 2rem;
+            box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.1); /* Sombra interna para profundidade */
+        }
+        .logo {
+            max-width: 250px; /* Ajuste o tamanho da logo conforme necessário */
+            height: auto;
+            border-radius: 8px; /* Borda arredondada para a logo */
+            padding: 5px 15px; /* Espaçamento interno para a logo */
+            background-color: white; /* Fundo branco para a logo */
+        }
+
+        /* Estilos para cabeçalhos de seção */
+        h1, h2 {
+            color: var(--primary-blue);
+            font-weight: bold;
+        }
+        h1 {
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* Sombra leve para o título principal */
+        }
+
+        /* Estilos para labels */
+        label {
+            color: var(--text-color-medium);
+        }
+
+        /* Estilos para seções de formulário */
+        section {
+            background-color: var(--section-bg-light); /* Fundo claro para as seções */
+            border: 1px solid rgba(61, 53, 126, 0.1); /* Borda sutil com a cor principal */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Sombra suave */
+        }
+
+        /* Estilos para inputs e textareas */
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        textarea,
+        select {
+            border-color: #d1d5db; /* Cor de borda padrão do Tailwind gray-300 */
+            transition: all 0.2s ease-in-out; /* Transição suave para foco */
+        }
         input[type="text"]:focus,
         input[type="number"]:focus,
         input[type="date"]:focus,
         textarea:focus,
         select:focus {
             outline: none;
-            border-color: #6366f1; /* Indigo 500 */
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.5); /* Indigo 500 with transparency */
+            border-color: var(--primary-blue); /* Borda com a cor principal no foco */
+            box-shadow: 0 0 0 3px rgba(61, 53, 126, 0.3); /* Sombra de foco com a cor principal */
         }
+
+        /* Estilos para radio buttons */
+        .form-radio {
+            color: var(--primary-blue); /* Cor do radio button */
+            accent-color: var(--primary-blue); /* Cor do preenchimento do radio button */
+        }
+
+        /* Estilo para o botão de envio */
+        #submitButton {
+            background-color: var(--primary-blue);
+            color: white;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 5px 15px rgba(61, 53, 126, 0.3); /* Sombra para o botão */
+        }
+        #submitButton:hover {
+            background-color: var(--secondary-yellow); /* Cor amarela no hover */
+            color: var(--primary-blue); /* Texto azul no hover para contraste */
+            transform: translateY(-2px) scale(1.02); /* Efeito de levantar e crescer no hover */
+            box-shadow: 0 8px 20px rgba(237, 174, 15, 0.4); /* Sombra com a cor amarela */
+        }
+        #submitButton:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(61, 53, 126, 0.4);
+        }
+
+        /* Estilos para a caixa de mensagem */
+        #messageBox.bg-green-100 { background-color: #d1fae5; color: #065f46; } /* Verde claro para sucesso */
+        #messageBox.bg-red-100 { background-color: #fee2e2; color: #991b1b; } /* Vermelho claro para erro */
     </style>
 </head>
 <body class="p-4 sm:p-6 md:p-8 lg:p-10">
-    <div class="max-w-4xl mx-auto bg-white p-6 sm:p-8 md:p-10 rounded-lg shadow-xl">
-        <h1 class="text-3xl sm:text-4xl font-extrabold text-center text-gray-900 mb-8">
+    <div class="max-w-4xl mx-auto bg-white p-6 sm:p-8 md:p-10 rounded-lg main-container">
+        <!-- Seção da Logo com fundo da cor principal -->
+        <div class="logo-section">
+            <img src="Logo_Bitrix_Prancheta 1.png" alt="Logo Santa Ilha" class="logo">
+        </div>
+
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-center mb-8">
             Checklist de Dados do Negócio Imobiliário
         </h1>
 
         <form id="realEstateForm" class="space-y-8">
             <!-- Dados do Imóvel -->
-            <section class="bg-gray-50 p-6 rounded-lg shadow-inner">
-                <h2 class="text-2xl font-bold text-gray-800 mb-4">Dados do Imóvel</h2>
+            <section class="p-6 rounded-lg">
+                <h2 class="text-2xl font-bold mb-4">Dados do Imóvel</h2>
                 <div class="space-y-4">
                     <div>
-                        <label for="descricaoImovel" class="block text-sm font-medium text-gray-700 mb-1">Descrição do Imóvel:</label>
-                        <textarea id="descricaoImovel" name="descricaoImovel" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2"></textarea>
+                        <label for="descricaoImovel" class="block text-sm font-medium mb-1">Descrição do Imóvel:</label>
+                        <textarea id="descricaoImovel" name="descricaoImovel" rows="4" class="mt-1 block w-full rounded-md border shadow-sm focus:ring-brand-blue focus:border-brand-blue p-2"></textarea>
                     </div>
                     <div>
-                        <label for="itensAcompanham" class="block text-sm font-medium text-gray-700 mb-1">Itens que acompanham o imóvel:</label>
-                        <textarea id="itensAcompanham" name="itensAcompanham" rows="2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2"></textarea>
+                        <label for="itensAcompanham" class="block text-sm font-medium mb-1">Itens que acompanham o imóvel:</label>
+                        <textarea id="itensAcompanham" name="itensAcompanham" rows="2" class="mt-1 block w-full rounded-md border shadow-sm focus:ring-brand-blue focus:border-brand-blue p-2"></textarea>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Posse ou escritura?</label>
+                        <label class="block text-sm font-medium mb-1">Posse ou escritura?</label>
                         <div class="mt-1 flex space-x-4">
                             <label class="inline-flex items-center">
-                                <input type="radio" name="posseEscritura" value="Posse" class="form-radio text-indigo-600 rounded-full focus:ring-indigo-500">
-                                <span class="ml-2 text-gray-700">Posse</span>
+                                <input type="radio" name="posseEscritura" value="Posse" class="form-radio rounded-full focus:ring-brand-blue">
+                                <span class="ml-2 text-text-color-dark">Posse</span>
                             </label>
                             <label class="inline-flex items-center">
-                                <input type="radio" name="posseEscritura" value="Escritura" class="form-radio text-indigo-600 rounded-full focus:ring-indigo-500">
-                                <span class="ml-2 text-gray-700">Escritura</span>
+                                <input type="radio" name="posseEscritura" value="Escritura" class="form-radio rounded-full focus:ring-brand-blue">
+                                <span class="ml-2 text-text-color-dark">Escritura</span>
                             </label>
                         </div>
                     </div>
@@ -59,179 +165,179 @@
             </section>
 
             <!-- Condições de Entrega -->
-            <section class="bg-gray-50 p-6 rounded-lg shadow-inner">
-                <h2 class="text-2xl font-bold text-gray-800 mb-4">Condições de Entrega</h2>
+            <section class="p-6 rounded-lg">
+                <h2 class="text-2xl font-bold mb-4">Condições de Entrega</h2>
                 <div class="space-y-4">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Entrega do Imóvel:</label>
+                        <label class="block text-sm font-medium mb-1">Entrega do Imóvel:</label>
                         <div class="mt-1 flex space-x-4">
                             <label class="inline-flex items-center">
-                                <input type="radio" name="entregaImovel" value="Quitação" class="form-radio text-indigo-600 rounded-full focus:ring-indigo-500">
-                                <span class="ml-2 text-gray-700">Quitação</span>
+                                <input type="radio" name="entregaImovel" value="Quitação" class="form-radio rounded-full focus:ring-brand-blue">
+                                <span class="ml-2 text-text-color-dark">Quitação</span>
                             </label>
                             <label class="inline-flex items-center">
-                                <input type="radio" name="entregaImovel" value="Precária" class="form-radio text-indigo-600 rounded-full focus:ring-indigo-500">
-                                <span class="ml-2 text-gray-700">Precária</span>
+                                <input type="radio" name="entregaImovel" value="Precária" class="form-radio rounded-full focus:ring-brand-blue">
+                                <span class="ml-2 text-text-color-dark">Precária</span>
                             </label>
                         </div>
                     </div>
                     <div>
-                        <label for="obsEntrega" class="block text-sm font-medium text-gray-700 mb-1">Observação da Entrega do Imóvel (se precária):</label>
-                        <textarea id="obsEntrega" name="obsEntrega" rows="2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2"></textarea>
+                        <label for="obsEntrega" class="block text-sm font-medium mb-1">Observação da Entrega do Imóvel (se precária):</label>
+                        <textarea id="obsEntrega" name="obsEntrega" rows="2" class="mt-1 block w-full rounded-md border shadow-sm focus:ring-brand-blue focus:border-brand-blue p-2"></textarea>
                     </div>
                     <div>
-                        <label for="obsJuridico" class="block text-sm font-medium text-gray-700 mb-1">Observações pertinentes ao Jurídico:</label>
-                        <textarea id="obsJuridico" name="obsJuridico" rows="2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2"></textarea>
+                        <label for="obsJuridico" class="block text-sm font-medium mb-1">Observações pertinentes ao Jurídico:</label>
+                        <textarea id="obsJuridico" name="obsJuridico" rows="2" class="mt-1 block w-full rounded-md border shadow-sm focus:ring-brand-blue focus:border-brand-blue p-2"></textarea>
                     </div>
                 </div>
             </section>
 
             <!-- Valores e Pagamentos -->
-            <section class="bg-gray-50 p-6 rounded-lg shadow-inner">
-                <h2 class="text-2xl font-bold text-gray-800 mb-4">Valores e Pagamentos</h2>
+            <section class="p-6 rounded-lg">
+                <h2 class="text-2xl font-bold mb-4">Valores e Pagamentos</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label for="valorFinal" class="block text-sm font-medium text-gray-700 mb-1">Valor final do negócio (R$):</label>
-                        <input type="number" id="valorFinal" name="valorFinal" step="0.01" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                        <label for="valorFinal" class="block text-sm font-medium mb-1">Valor final do negócio (R$):</label>
+                        <input type="number" id="valorFinal" name="valorFinal" step="0.01" class="mt-1 block w-full rounded-md border shadow-sm focus:ring-brand-blue focus:border-brand-blue p-2">
                     </div>
                     <div>
-                        <label for="valorEntrada" class="block text-sm font-medium text-gray-700 mb-1">Valor da entrada (R$):</label>
-                        <input type="number" id="valorEntrada" name="valorEntrada" step="0.01" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                        <label for="valorEntrada" class="block text-sm font-medium mb-1">Valor da entrada (R$):</label>
+                        <input type="number" id="valorEntrada" name="valorEntrada" step="0.01" class="mt-1 block w-full rounded-md border shadow-sm focus:ring-brand-blue focus:border-brand-blue p-2">
                     </div>
                     <div class="md:col-span-2">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Imóvel ou veículo como pagamento?</label>
+                        <label class="block text-sm font-medium mb-1">Imóvel ou veículo como pagamento?</label>
                         <div class="mt-1 flex space-x-4">
                             <label class="inline-flex items-center">
-                                <input type="radio" name="permuta" value="Sim" class="form-radio text-indigo-600 rounded-full focus:ring-indigo-500">
-                                <span class="ml-2 text-gray-700">Sim</span>
+                                <input type="radio" name="permuta" value="Sim" class="form-radio rounded-full focus:ring-brand-blue">
+                                <span class="ml-2 text-text-color-dark">Sim</span>
                             </label>
                             <label class="inline-flex items-center">
-                                <input type="radio" name="permuta" value="Não" class="form-radio text-indigo-600 rounded-full focus:ring-indigo-500">
-                                <span class="ml-2 text-gray-700">Não</span>
+                                <input type="radio" name="permuta" value="Não" class="form-radio rounded-full focus:ring-brand-blue">
+                                <span class="ml-2 text-text-color-dark">Não</span>
                             </label>
                         </div>
                     </div>
                     <div>
-                        <label for="valorDescontadoPermuta" class="block text-sm font-medium text-gray-700 mb-1">Valor descontado de permuta (R$):</label>
-                        <input type="number" id="valorDescontadoPermuta" name="valorDescontadoPermuta" step="0.01" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                        <label for="valorDescontadoPermuta" class="block text-sm font-medium mb-1">Valor descontado de permuta (R$):</label>
+                        <input type="number" id="valorDescontadoPermuta" name="valorDescontadoPermuta" step="0.01" class="mt-1 block w-full rounded-md border shadow-sm focus:ring-brand-blue focus:border-brand-blue p-2">
                     </div>
                     <div>
-                        <label for="percentualComissao" class="block text-sm font-medium text-gray-700 mb-1">Percentual da comissão (apenas número, sem %):</label>
-                        <input type="number" id="percentualComissao" name="percentualComissao" step="0.01" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                        <label for="percentualComissao" class="block text-sm font-medium mb-1">Percentual da comissão (apenas número, sem %):</label>
+                        <input type="number" id="percentualComissao" name="percentualComissao" step="0.01" class="mt-1 block w-full rounded-md border shadow-sm focus:ring-brand-blue focus:border-brand-blue p-2">
                     </div>
                     <div class="md:col-span-2">
-                        <label for="condicaoPagamentoComissao" class="block text-sm font-medium text-gray-700 mb-1">Condição de pagamento da comissão:</label>
-                        <input type="text" id="condicaoPagamentoComissao" name="condicaoPagamentoComissao" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                        <label for="condicaoPagamentoComissao" class="block text-sm font-medium mb-1">Condição de pagamento da comissão:</label>
+                        <input type="text" id="condicaoPagamentoComissao" name="condicaoPagamentoComissao" class="mt-1 block w-full rounded-md border shadow-sm focus:ring-brand-blue focus:border-brand-blue p-2">
                     </div>
                     <div class="md:col-span-2">
-                        <label for="momentoPagamentoComissao" class="block text-sm font-medium text-gray-700 mb-1">Em que momento a comissão é paga?</label>
-                        <input type="text" id="momentoPagamentoComissao" name="momentoPagamentoComissao" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                        <label for="momentoPagamentoComissao" class="block text-sm font-medium mb-1">Em que momento a comissão é paga?</label>
+                        <input type="text" id="momentoPagamentoComissao" name="momentoPagamentoComissao" class="mt-1 block w-full rounded-md border shadow-sm focus:ring-brand-blue focus:border-brand-blue p-2">
                     </div>
                 </div>
             </section>
 
             <!-- Parceria -->
-            <section class="bg-gray-50 p-6 rounded-lg shadow-inner">
-                <h2 class="text-2xl font-bold text-gray-800 mb-4">Parceria</h2>
+            <section class="p-6 rounded-lg">
+                <h2 class="text-2xl font-bold mb-4">Parceria</h2>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Parceria com corretor ou imobiliária?</label>
+                    <label class="block text-sm font-medium mb-1">Parceria com corretor ou imobiliária?</label>
                     <div class="mt-1 flex space-x-4">
                         <label class="inline-flex items-center">
-                            <input type="radio" name="parceria" value="Corretor" class="form-radio text-indigo-600 rounded-full focus:ring-indigo-500">
-                            <span class="ml-2 text-gray-700">Corretor</span>
+                            <input type="radio" name="parceria" value="Corretor" class="form-radio rounded-full focus:ring-brand-blue">
+                            <span class="ml-2 text-text-color-dark">Corretor</span>
                         </label>
                         <label class="inline-flex items-center">
-                            <input type="radio" name="parceria" value="Imobiliária" class="form-radio text-indigo-600 rounded-full focus:ring-indigo-500">
-                            <span class="ml-2 text-gray-700">Imobiliária</span>
+                            <input type="radio" name="parceria" value="Imobiliária" class="form-radio rounded-full focus:ring-brand-blue">
+                            <span class="ml-2 text-text-color-dark">Imobiliária</span>
                         </label>
                         <label class="inline-flex items-center">
-                            <input type="radio" name="parceria" value="Nenhuma" class="form-radio text-indigo-600 rounded-full focus:ring-indigo-500">
-                            <span class="ml-2 text-gray-700">Nenhuma</span>
+                            <input type="radio" name="parceria" value="Nenhuma" class="form-radio rounded-full focus:ring-brand-blue">
+                            <span class="ml-2 text-text-color-dark">Nenhuma</span>
                         </label>
                     </div>
                 </div>
             </section>
 
             <!-- Dados Bancários do Vendedor -->
-            <section class="bg-gray-50 p-6 rounded-lg shadow-inner">
-                <h2 class="text-2xl font-bold text-gray-800 mb-4">Dados Bancários do Vendedor</h2>
+            <section class="p-6 rounded-lg">
+                <h2 class="text-2xl font-bold mb-4">Dados Bancários do Vendedor</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label for="banco" class="block text-sm font-medium text-gray-700 mb-1">Banco:</label>
-                        <input type="text" id="banco" name="banco" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                        <label for="banco" class="block text-sm font-medium mb-1">Banco:</label>
+                        <input type="text" id="banco" name="banco" class="mt-1 block w-full rounded-md border shadow-sm focus:ring-brand-blue focus:border-brand-blue p-2">
                     </div>
                     <div>
-                        <label for="agencia" class="block text-sm font-medium text-gray-700 mb-1">Agência:</label>
-                        <input type="text" id="agencia" name="agencia" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                        <label for="agencia" class="block text-sm font-medium mb-1">Agência:</label>
+                        <input type="text" id="agencia" name="agencia" class="mt-1 block w-full rounded-md border shadow-sm focus:ring-brand-blue focus:border-brand-blue p-2">
                     </div>
                     <div>
-                        <label for="contaCorrente" class="block text-sm font-medium text-gray-700 mb-1">Conta Corrente:</label>
-                        <input type="text" id="contaCorrente" name="contaCorrente" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                        <label for="contaCorrente" class="block text-sm font-medium mb-1">Conta Corrente:</label>
+                        <input type="text" id="contaCorrente" name="contaCorrente" class="mt-1 block w-full rounded-md border shadow-sm focus:ring-brand-blue focus:border-brand-blue p-2">
                     </div>
                     <div>
-                        <label for="nomeTitular" class="block text-sm font-medium text-gray-700 mb-1">Nome do titular:</label>
-                        <input type="text" id="nomeTitular" name="nomeTitular" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                        <label for="nomeTitular" class="block text-sm font-medium mb-1">Nome do titular:</label>
+                        <input type="text" id="nomeTitular" name="nomeTitular" class="mt-1 block w-full rounded-md border shadow-sm focus:ring-brand-blue focus:border-brand-blue p-2">
                     </div>
                     <div class="md:col-span-2">
-                        <label for="cpfCnpj" class="block text-sm font-medium text-gray-700 mb-1">CPF/CNPJ:</label>
-                        <input type="text" id="cpfCnpj" name="cpfCnpj" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                        <label for="cpfCnpj" class="block text-sm font-medium mb-1">CPF/CNPJ:</label>
+                        <input type="text" id="cpfCnpj" name="cpfCnpj" class="mt-1 block w-full rounded-md border shadow-sm focus:ring-brand-blue focus:border-brand-blue p-2">
                     </div>
                 </div>
             </section>
 
             <!-- Previsão de Assinatura -->
-            <section class="bg-gray-50 p-6 rounded-lg shadow-inner">
-                <h2 class="text-2xl font-bold text-gray-800 mb-4">Previsão de Assinatura</h2>
+            <section class="p-6 rounded-lg">
+                <h2 class="text-2xl font-bold mb-4">Previsão de Assinatura</h2>
                 <div>
-                    <label for="dataAssinatura" class="block text-sm font-medium text-gray-700 mb-1">Data prevista para assinatura do contrato:</label>
-                    <input type="date" id="dataAssinatura" name="dataAssinatura" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                    <label for="dataAssinatura" class="block text-sm font-medium mb-1">Data prevista para assinatura do contrato:</label>
+                    <input type="date" id="dataAssinatura" name="dataAssinatura" class="mt-1 block w-full rounded-md border shadow-sm focus:ring-brand-blue focus:border-brand-blue p-2">
                 </div>
             </section>
 
-            <!-- Documentação -->
-            <section class="bg-gray-50 p-6 rounded-lg shadow-inner">
-                <h2 class="text-2xl font-bold text-gray-800 mb-4">Documentação</h2>
+            <!-- Documentação (Links do Drive) -->
+            <section class="p-6 rounded-lg">
+                <h2 class="text-2xl font-bold mb-4">Documentação</h2>
                 <div>
-                    <label for="documentosAnexar" class="block text-sm font-medium text-gray-700 mb-1">Documentos do imóvel e proprietário (anexar arquivos):</label>
-                    <input type="file" id="documentosAnexar" name="documentosAnexar" multiple class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
-                    <p class="mt-2 text-xs text-gray-500">Nota: O envio de arquivos diretamente para um webhook via formulário HTML simples não é totalmente suportado. Geralmente, isso requer um backend para processar o upload. Este campo é apenas para demonstração.</p>
+                    <label for="linksDocumentos" class="block text-sm font-medium mb-1">Links dos Documentos (Google Drive, etc.):</label>
+                    <textarea id="linksDocumentos" name="linksDocumentos" rows="4" class="mt-1 block w-full rounded-md border shadow-sm focus:ring-brand-blue focus:border-brand-blue p-2" placeholder="Cole os links dos documentos aqui, um por linha ou separados por vírgula."></textarea>
+                    <p class="mt-2 text-xs text-gray-500">Por exemplo: https://drive.google.com/file/d/abc123xyz/view</p>
                 </div>
             </section>
 
             <!-- Equipe Envolvida -->
-            <section class="bg-gray-50 p-6 rounded-lg shadow-inner">
-                <h2 class="text-2xl font-bold text-gray-800 mb-4">Equipe Envolvida</h2>
+            <section class="p-6 rounded-lg">
+                <h2 class="text-2xl font-bold mb-4">Equipe Envolvida</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     <div>
-                        <label for="corretor2" class="block text-sm font-medium text-gray-700 mb-1">Corretor 2:</label>
-                        <input type="text" id="corretor2" name="corretor2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                        <label for="corretor2" class="block text-sm font-medium mb-1">Corretor 2:</label>
+                        <input type="text" id="corretor2" name="corretor2" class="mt-1 block w-full rounded-md border shadow-sm focus:ring-brand-blue focus:border-brand-blue p-2">
                     </div>
                     <div>
-                        <label for="gerente1" class="block text-sm font-medium text-gray-700 mb-1">Gerente 1:</label>
-                        <input type="text" id="gerente1" name="gerente1" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                        <label for="gerente1" class="block text-sm font-medium mb-1">Gerente 1:</label>
+                        <input type="text" id="gerente1" name="gerente1" class="mt-1 block w-full rounded-md border shadow-sm focus:ring-brand-blue focus:border-brand-blue p-2">
                     </div>
                     <div>
-                        <label for="gerente2" class="block text-sm font-medium text-gray-700 mb-1">Gerente 2:</label>
-                        <input type="text" id="gerente2" name="gerente2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                        <label for="gerente2" class="block text-sm font-medium mb-1">Gerente 2:</label>
+                        <input type="text" id="gerente2" name="gerente2" class="mt-1 block w-full rounded-md border shadow-sm focus:ring-brand-blue focus:border-brand-blue p-2">
                     </div>
                     <div>
-                        <label for="agenciador1" class="block text-sm font-medium text-gray-700 mb-1">Agenciador 1:</label>
-                        <input type="text" id="agenciador1" name="agenciador1" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                        <label for="agenciador1" class="block text-sm font-medium mb-1">Agenciador 1:</label>
+                        <input type="text" id="agenciador1" name="agenciador1" class="mt-1 block w-full rounded-md border shadow-sm focus:ring-brand-blue focus:border-brand-blue p-2">
                     </div>
                     <div>
-                        <label for="agenciador2" class="block text-sm font-medium text-gray-700 mb-1">Agenciador 2:</label>
-                        <input type="text" id="agenciador2" name="agenciador2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                        <label for="agenciador2" class="block text-sm font-medium mb-1">Agenciador 2:</label>
+                        <input type="text" id="agenciador2" name="agenciador2" class="mt-1 block w-full rounded-md border shadow-sm focus:ring-brand-blue focus:border-brand-blue p-2">
                     </div>
                     <div>
-                        <label for="agenciador3" class="block text-sm font-medium text-gray-700 mb-1">Agenciador 3:</label>
-                        <input type="text" id="agenciador3" name="agenciador3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                        <label for="agenciador3" class="block text-sm font-medium mb-1">Agenciador 3:</label>
+                        <input type="text" id="agenciador3" name="agenciador3" class="mt-1 block w-full rounded-md border shadow-sm focus:ring-brand-blue focus:border-brand-blue p-2">
                     </div>
                 </div>
             </section>
 
             <!-- Botão de Envio -->
             <div class="flex justify-center mt-8">
-                <button type="submit" id="submitButton" class="px-8 py-3 bg-indigo-600 text-white font-bold rounded-full shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition duration-300 ease-in-out transform hover:scale-105">
+                <button type="submit" id="submitButton" class="px-8 py-3 rounded-full font-bold shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
                     Enviar Informações
                 </button>
             </div>
@@ -292,9 +398,9 @@
                 emailBody += '--- Previsão de Assinatura ---\n';
                 emailBody += `Data prevista para assinatura do contrato: ${data.dataAssinatura || 'Não informado'}\n\n`;
 
-                // Documentação (apenas nomes dos arquivos, conforme nota)
+                // Documentação (Links do Drive)
                 emailBody += '--- Documentação ---\n';
-                emailBody += `Documentos anexados (nomes): ${data.documentosAnexar || 'Nenhum arquivo selecionado'}\n\n`;
+                emailBody += `Links dos Documentos: ${data.linksDocumentos || 'Nenhum link fornecido'}\n\n`;
 
                 // Equipe Envolvida
                 emailBody += '--- Equipe Envolvida ---\n';
@@ -309,42 +415,33 @@
             }
 
             form.addEventListener('submit', async (event) => {
-                event.preventDefault(); // Prevent default form submission
+                event.preventDefault(); // Previne o envio padrão do formulário
 
                 submitButton.disabled = true;
                 submitButton.textContent = 'Enviando...';
-                messageBox.classList.add('hidden'); // Hide previous messages
+                messageBox.classList.add('hidden'); // Esconde mensagens anteriores
 
                 const formData = new FormData(form);
                 const data = {};
 
-                // Collect data from all form fields
+                // Coleta os dados de todos os campos do formulário
                 for (const [key, value] of formData.entries()) {
-                    // Handle radio buttons specifically to get the checked value
+                    // Lida especificamente com os radio buttons para obter o valor marcado
                     if (key === 'posseEscritura' || key === 'entregaImovel' || key === 'permuta' || key === 'parceria') {
                         const checkedRadio = form.querySelector(`input[name="${key}"]:checked`);
                         data[key] = checkedRadio ? checkedRadio.value : '';
-                    } else if (key === 'documentosAnexar') {
-                        // For file inputs, we'll just note the file names for the webhook.
-                        // Actual file upload requires a backend.
-                        const files = formData.getAll(key);
-                        if (files.length > 0 && files[0].name) {
-                            data[key] = Array.from(files).map(file => file.name).join(', ');
-                        } else {
-                            data[key] = '';
-                        }
                     } else {
                         data[key] = value;
                     }
                 }
 
-                // Convert numeric fields to actual numbers
+                // Converte campos numéricos para números reais
                 data.valorFinal = parseFloat(data.valorFinal) || 0;
                 data.valorEntrada = parseFloat(data.valorEntrada) || 0;
                 data.valorDescontadoPermuta = parseFloat(data.valorDescontadoPermuta) || 0;
                 data.percentualComissao = parseFloat(data.percentualComissao) || 0;
 
-                // Format the data for the email body
+                // Formata os dados para o corpo do e-mail
                 const emailBodyContent = formatEmailBody(data);
                 console.log("Conteúdo do E-mail para o módulo Gmail:\n", emailBodyContent);
 
@@ -354,13 +451,13 @@
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify(data), // Still sending JSON to the original webhook
+                        body: JSON.stringify(data), // Ainda enviando JSON para o webhook original
                     });
 
                     if (response.ok) {
                         messageBox.textContent = 'Informações enviadas com sucesso! (Conteúdo do e-mail gerado no console)';
                         messageBox.className = 'mt-4 p-3 text-center text-sm rounded-md bg-green-100 text-green-700';
-                        form.reset(); // Clear the form on success
+                        form.reset(); // Limpa o formulário em caso de sucesso
                     } else {
                         const errorText = await response.text();
                         messageBox.textContent = `Erro ao enviar informações: ${response.status} - ${errorText || 'Erro desconhecido'}`;
